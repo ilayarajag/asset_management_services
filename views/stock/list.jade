@@ -1,0 +1,39 @@
+extends ../layout
+
+block content
+  .card
+    .card-body
+      h4 Stock View
+      .table-responsive
+        table.table.table-striped.table-bordered.datatable
+          thead
+            tr
+              th Asset UID
+              th Category
+              th Make
+              th Model
+              th Branch
+              th Purchase Price
+          tbody
+            each asset in assets
+              tr
+                td= asset.asset_uid
+                td= asset.AssetCategory ? asset.AssetCategory.category_name : ''
+                td= asset.make
+                td= asset.model
+                td= asset.branch
+                td= asset.purchase_price
+      .mt-3
+        h5 Summary by Branch
+        table.table.table-sm.table-bordered
+          thead
+            tr
+              th Branch
+              th Count
+              th Total Value
+          tbody
+            each row in branchSummary
+              tr
+                td= row.branch
+                td= row.count
+                td= row.value.toFixed(2)

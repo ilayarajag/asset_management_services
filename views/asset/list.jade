@@ -1,0 +1,48 @@
+extends ../layout
+
+block content
+  .d-flex.justify-content-between.align-items-center.mb-3
+    h3 Asset Master
+    a.btn.btn-primary(href='/assets/new') Add Asset
+
+  form.row.g-2.mb-3(method='GET', action='/assets')
+    .col-md-4
+      input.form-control(type='text', name='search', placeholder='Search by UID/serial/make/model', value=filters.search)
+    .col-md-3
+      select.form-select(name='category_id')
+        option(value='') All Categories
+        each category in categories
+          option(value=category.id, selected=filters.category_id == category.id)= category.category_name
+    .col-md-3
+      select.form-select(name='status')
+        option(value='') All Status
+        option(value='Available', selected=filters.status === 'Available') Available
+        option(value='Issued', selected=filters.status === 'Issued') Issued
+        option(value='Returned', selected=filters.status === 'Returned') Returned
+    .col-md-2
+      button.btn.btn-outline-secondary(type='submit') Filter
+
+  .table-responsive
+    table.table.table-striped.table-bordered.datatable
+      thead
+        tr
+          th UID
+          th Serial
+          th Category
+          th Make
+          th Model
+          th Branch
+          th Status
+          th Actions
+      tbody
+        each asset in assets
+          tr
+            td= asset.asset_uid
+            td= asset.serial_no
+            td= asset.AssetCategory ? asset.AssetCategory.category_name : ''
+            td= asset.make
+            td= asset.model
+            td= asset.branch
+            td= asset.status
+            td
+              a.btn.btn-sm.btn-outline-primary(href='/assets/' + asset.id + '/edit') Edit

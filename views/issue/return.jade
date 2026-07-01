@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+  .card
+    .card-body
+      h4 Return Asset
+      form(method='POST', action='/returns')
+        .row.g-3
+          .col-md-6
+            label.form-label Issued Asset
+            select.form-select(name='issue_id', required)
+              each issue in issues
+                option(value=issue.id)= issue.Asset.asset_uid + ' - ' + issue.Employee.employee_name
+          .col-md-6
+            label.form-label Return Date
+            input.form-control(type='date', name='return_date', required)
+          .col-md-12
+            label.form-label Reason for Return
+            input.form-control(type='text', name='reason', placeholder='Upgrade / Repair / Resignation / etc.')
+        .mt-3
+          button.btn.btn-primary(type='submit') Return Asset
+          a.btn.btn-secondary.ms-2(href='/') Cancel

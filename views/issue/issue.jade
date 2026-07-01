@@ -1,0 +1,29 @@
+extends ../layout
+
+block content
+  .card
+    .card-body
+      h4 Issue Asset
+      if success
+        .alert.alert-success Asset issued successfully.
+      form(method='POST', action='/issues')
+        .row.g-3
+          .col-md-6
+            label.form-label Employee
+            select.form-select(name='employee_id', required)
+              each employee in employees
+                option(value=employee.id)= employee.employee_name + ' (' + employee.employee_code + ')'
+          .col-md-6
+            label.form-label Asset
+            select.form-select(name='asset_id', required)
+              each asset in assets
+                option(value=asset.id)= asset.asset_uid + ' - ' + asset.AssetCategory.category_name + ' (' + asset.make + ' ' + asset.model + ')'
+          .col-md-6
+            label.form-label Issue Date
+            input.form-control(type='date', name='issue_date', required)
+          .col-md-6
+            label.form-label Expected Return Date
+            input.form-control(type='date', name='expected_return')
+        .mt-3
+          button.btn.btn-primary(type='submit') Issue Asset
+          a.btn.btn-secondary.ms-2(href='/') Cancel

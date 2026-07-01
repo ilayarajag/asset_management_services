@@ -1,0 +1,34 @@
+extends ../layout
+
+block content
+  .card
+    .card-body
+      h4= title
+      form(method='POST', action=employee.id ? '/employees/' + employee.id : '/employees')
+        .row.g-3
+          .col-md-6
+            label.form-label Employee Code
+            input.form-control(type='text', name='employee_code', value=employee.employee_code, required)
+          .col-md-6
+            label.form-label Employee Name
+            input.form-control(type='text', name='employee_name', value=employee.employee_name, required)
+          .col-md-6
+            label.form-label Email
+            input.form-control(type='email', name='email', value=employee.email)
+          .col-md-6
+            label.form-label Department
+            input.form-control(type='text', name='department', value=employee.department)
+          .col-md-6
+            label.form-label Designation
+            input.form-control(type='text', name='designation', value=employee.designation)
+          .col-md-6
+            label.form-label Branch
+            input.form-control(type='text', name='branch', value=employee.branch)
+          .col-md-6
+            label.form-label Status
+            select.form-select(name='status')
+              option(value='true', selected=employee.status !== false) Active
+              option(value='false', selected=employee.status === false) Inactive
+        .mt-3
+          button.btn.btn-primary(type='submit') Save
+          a.btn.btn-secondary.ms-2(href='/employees') Cancel

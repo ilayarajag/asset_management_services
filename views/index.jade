@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  .row.g-4
+    .col-md-3
+      .card.text-white.bg-primary
+        .card-body
+          h5.card-title Employees
+          h2= employeeCount
+    .col-md-3
+      .card.text-white.bg-success
+        .card-body
+          h5.card-title Assets
+          h2= assetCount
+    .col-md-3
+      .card.text-white.bg-warning
+        .card-body
+          h5.card-title Categories
+          h2= categoryCount
+    .col-md-3
+      .card.text-white.bg-danger
+        .card-body
+          h5.card-title Issued
+          h2= issuedCount
+
+  .card
+    .card-body
+      h4.card-title Asset Management Demo
+      p This interview-ready application covers employee master, asset master, categories, stock view, issue, return, scrap, and history.
+      .mt-3
+        a.btn.btn-primary.me-2(href='/employees') Manage Employees
+        a.btn.btn-success.me-2(href='/assets') Manage Assets
+        a.btn.btn-outline-secondary(href='/categories') Manage Categories

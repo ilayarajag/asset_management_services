@@ -1,0 +1,21 @@
+extends ../layout
+
+block content
+  .d-flex.justify-content-between.align-items-center.mb-3
+    h3 Asset Category Master
+    a.btn.btn-primary(href='/categories/new') Add Category
+
+  .table-responsive
+    table.table.table-striped.table-bordered.datatable
+      thead
+        tr
+          th Name
+          th Description
+          th Actions
+      tbody
+        each category in categories
+          tr
+            td= category.category_name
+            td= category.description
+            td
+              a.btn.btn-sm.btn-outline-primary(href='/categories/' + category.id + '/edit') Edit

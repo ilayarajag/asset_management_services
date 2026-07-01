@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+  .card
+    .card-body
+      h4 Scrap Asset
+      form(method='POST', action='/scrap')
+        .row.g-3
+          .col-md-6
+            label.form-label Asset
+            select.form-select(name='asset_id')
+              each asset in assets
+                option(value=asset.id)= asset.asset_uid + ' - ' + asset.make + ' ' + asset.model
+          .col-md-6
+            label.form-label Reason
+            input.form-control(type='text', name='reason', placeholder='Obsolete / Damaged / etc.')
+        .mt-3
+          button.btn.btn-danger(type='submit') Mark as Scrapped
+          a.btn.btn-secondary.ms-2(href='/') Cancel

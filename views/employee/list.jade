@@ -1,0 +1,42 @@
+extends ../layout
+
+block content
+  .d-flex.justify-content-between.align-items-center.mb-3
+    h3 Employee Master
+    a.btn.btn-primary(href='/employees/new') Add Employee
+
+  form.row.g-2.mb-3(method='GET', action='/employees')
+    .col-md-4
+      input.form-control(type='text', name='search', placeholder='Search by name/code/department', value=filters.search)
+    .col-md-3
+      select.form-select(name='status')
+        option(value='') All Employees
+        option(value='true', selected=filters.status === 'true') Active
+        option(value='false', selected=filters.status === 'false') Inactive
+    .col-md-2
+      button.btn.btn-outline-secondary(type='submit') Filter
+    .col-md-2
+      a.btn.btn-outline-secondary(href='/employees') Reset
+
+  .table-responsive
+    table.table.table-striped.table-bordered.datatable
+      thead
+        tr
+          th Employee Code
+          th Name
+          th Department
+          th Designation
+          th Branch
+          th Status
+          th Actions
+      tbody
+        each employee in employees
+          tr
+            td= employee.employee_code
+            td= employee.employee_name
+            td= employee.department
+            td= employee.designation
+            td= employee.branch
+            td= employee.status ? 'Active' : 'Inactive'
+            td
+              a.btn.btn-sm.btn-outline-primary(href='/employees/' + employee.id + '/edit') Edit
